@@ -7,6 +7,7 @@ import { Dashboard } from './views/dashboard';
 import { Terms } from './views/terms';
 import { PrivateRoute, auth } from './Auth';
 import Header from './components/Header/index';
+import { SignupForm } from './views/signup';
 
 export const UserContext = React.createContext();
 
@@ -86,6 +87,7 @@ export class App extends React.Component {
             <Switch>
               <PrivateRoute exact path='/' component={Dashboard} />
               <Route exact path='/login' component={LoginForm} />
+              <Route exact path='/signup' component={SignupForm} />
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
               <Route exact path='/terms' component={Terms} />
             </Switch>
