@@ -13,15 +13,15 @@ const validationSchema = Yup.object().shape({
         .max(100, "*Names can't be longer than 100 characters"),
     emailAddress: Yup.string()
         .required("*Email Address is required"),
-        //To-Do: PASSWORD VALIDATION WITH YUP
-    // password: Yup.string()
-    //     .required("*City is required"),
-    // confirmPassword: Yup.string()
-    //     .required("*Password is required") 
+    password: Yup.string()
+        .required("*Password is required"),
+    confirmPassword: Yup.string()
+        .oneOf([Yup.ref('password'), null], "Passwords must match") //https://github.com/jaredpalmer/formik/issues/90
+        .required("*Password confirmation is required") 
 });
 
 const formHandler = (data) => {
-    // axios.post('http://localhost:5000/properties', data, { headers: {"Authorization" : `Bearer ${context.user.accessJwt}`} })
+    // axios.post('http://localhost:5000/users', data, { headers: {"Authorization" : `Bearer ${context.user.accessJwt}`} })
     //     .then(function(response){
     //         console.log(response);
     //     })
