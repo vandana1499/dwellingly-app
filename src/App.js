@@ -2,6 +2,7 @@ import React from 'react';
 import './App.scss';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { LoginForm } from './views/login';
+import { ForgotPassword } from './views/forgotPassword'
 import { Home } from './views/home';
 import { NavMenu } from './components/NavigationMenu/navigationMenu.js';
 import { Dashboard } from './views/dashboard';
@@ -130,6 +131,7 @@ export class App extends React.Component {
               <PrivateRoute exact path='/' component={Dashboard} />
               <Route exact path='/login' component={LoginForm} />
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
+              <Route exact path='/forgot_password' component={ForgotPassword}/>
               <Route exact path='/terms' component={Terms} />
 
               <PrivateRoute exact path='/home' component={Dashboard}/>
