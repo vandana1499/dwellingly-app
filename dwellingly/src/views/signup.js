@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import { Form, Field, Formik } from 'formik';
 import * as Yup from 'yup';
-import { UserContext } from '../App';
-import * as axios from 'axios';
+// import { UserContext } from '../App';
+// import * as axios from 'axios';
+
+//issues:
+    //clicking the sign up button does not result in console log (line 67 or line 32)
+    //errors for First Name and Last Name fields not rendering.
+
+//To Do
+    //add: OR "sign Up with google" link 
+    //add "privacy policy" href or redirect link
 
 const validationSchema = Yup.object().shape({
     firstName: Yup.string()
@@ -21,7 +29,8 @@ const validationSchema = Yup.object().shape({
 });
 
 const formHandler = (data) => {
-    // axios.post('http://localhost:5000/users', data, { headers: {"Authorization" : `Bearer ${context.user.accessJwt}`} })
+    console.log("Data passed to signup formHandler:", data);
+    // axios.post('http://localhost:5000/register', data, { headers: {"Authorization" : `Bearer ${context.user.accessJwt}`} })
     //     .then(function(response){
     //         console.log(response);
     //     })
@@ -42,95 +51,103 @@ export class SignupForm extends Component {
     render() {
       return (
         
-                    <div className="add-property__container">
-                        <h2 className="page-title">Create an Account for Dwelling.ly</h2>
+        <div className="add-property__container">
+            <h2 className="page-title">Create an Account for Dwelling.ly</h2>
 
-                        <Formik
-                            initialValues={{
-                                firstName: "",
-                                lastName: "",
-                                emailAddress: "",
-                                password: "",
-                                passwordConfirmation: ""
-                            }}
-                            validationSchema={validationSchema}
-                            onSubmit={(values, {setSubmitting, resetForm})=> {
-                                console.log("submitting", values);
-                                setSubmitting(true);
-                                formHandler(values);
-                                resetForm();
-                                setSubmitting(false);
+            <Formik
+                initialValues={{
+                    firstName: "",
+                    lastName: "",
+                    emailAddress: "",
+                    password: "",
+                    passwordConfirmation: ""
+                }}
+                validationSchema={validationSchema}
+                onSubmit={(values, {setSubmitting, resetForm})=> {
+                    console.log("submitting", values);
+                    setSubmitting(true);
+                    formHandler(values);
+                    resetForm();
+                    setSubmitting(false);
+                    
+                }}>
+                {({ handleSubmit, handleChange, values, errors, touched, isValid, isSubmitting }) => (
+                    <div className="form-container add-property__main_container">
+                        <Form className="add-property__form-container" onSubmit={handleSubmit}>
+                            <div className="form-row columns">
+                                <label className="column is-one-fifth" htmlFor="firstName">First Name</label>
+                                <Field
+                                    className="column form-field"
+                                    type="text"
+                                    name="firstName"
+                                    onChange={handleChange}
+                                    value={values.firstName}
+                                    placeholder="First Name"
+                                />
+                                {errors.firstName ? (<div className="error-message">{errors.firstName}</div>) : null} 
+                            </div>
+                            <div className="form-row columns">
+                                <label className="column is-one-fifth" htmlFor="lastName">Last Name</label>
+                                <Field
+                                    className="column form-field"
+                                    type="text"
+                                    name="lastName"
+                                    onChange={handleChange}
+                                    value={values.lastName}
+                                    placeholder="Last Name"
+                                />
+                                {errors.lastName ? (<div className="error-message">{errors.lastName}</div>) : null} 
+
+                            </div>
+                            <div className="form-row columns">
+                                <label className="column is-one-fifth" htmlFor="emailAddress">Email</label>
+                                <Field
+                                    className="column form-field"
+                                    type="text"
+                                    name="emailAddress"
+                                    onChange={handleChange}
+                                    value={values.emailAddress}
+                                    placeholder="Email"
+                                />
+                                {errors.emailAddress ? (<div className="error-message">{errors.emailAddress}</div>) : null} 
+
+                            </div>
+                            <div className="form-row columns">
+                                <label className="column is-one-fifth" htmlFor="password">Password</label>
+                                <Field
+                                    className="column form-field"
+                                    type="text"
+                                    name="password"
+                                    onChange={handleChange}
+                                    value={values.password}
+                                    placeholder="Password"
+                                />
+                                {errors.password ? (<div className="error-message">{errors.password}</div>) : null} 
+                            </div>
+                            <div className="form-row columns">
+                                <label className="column is-one-fifth" htmlFor="confirmPassword">Confirm Password</label>
+                                <Field
+                                    className="column form-field"
+                                    type="text"
+                                    name="confirmPassword"
+                                    onChange={handleChange}
+                                    value={values.confirmPassword}
+                                    placeholder=" Confirm Password"
+                                />
+                                {errors.confirmPassword ? (<div className="error-message">{errors.confirmPassword}</div>) : null} 
+                            </div>
+                            
+                            <div className="container-footer">
+                                <button className={`${isValid && "active"} save_button button is-rounded`} type="submit" disabled={isSubmitting}>SIGN UP</button>
                                 
-                            }}>
-                            {({ handleSubmit, handleChange, values, errors, touched, isValid, isSubmitting }) => (
-                                <div className="form-container add-property__main_container">
-                                    <Form className="add-property__form-container" onSubmit={handleSubmit}>
-                                        <div className="form-row columns">
-                                            <label className="column is-one-fifth" htmlFor="firstName">First Name</label>
-                                            <Field
-                                                className="column form-field"
-                                                type="text"
-                                                name="firstName"
-                                                onChange={handleChange}
-                                                value={values.firstName}
-                                                placeholder="First Name"
-                                            />
-                                        </div>
-                                        <div className="form-row columns">
-                                            <label className="column is-one-fifth" htmlFor="lastName">Last Name</label>
-                                            <Field
-                                                className="column form-field"
-                                                type="text"
-                                                name="lastName"
-                                                onChange={handleChange}
-                                                value={values.lastName}
-                                                placeholder="Last Name"
-                                            />
-                                        </div>
-                                        <div className="form-row columns">
-                                            <label className="column is-one-fifth" htmlFor="emailAddress">Email</label>
-                                            <Field
-                                                className="column form-field"
-                                                type="text"
-                                                name="emailAddress"
-                                                onChange={handleChange}
-                                                value={values.emailAddress}
-                                                placeholder="Email"
-                                            />
-                                        </div>
-                                        <div className="form-row columns">
-                                            <label className="column is-one-fifth" htmlFor="password">Password</label>
-                                            <Field
-                                                className="column form-field"
-                                                type="text"
-                                                name="password"
-                                                onChange={handleChange}
-                                                value={values.password}
-                                                placeholder="Password"
-                                            />
-                                        </div>
-                                        <div className="form-row columns">
-                                            <label className="column is-one-fifth" htmlFor="confirmPassword">Confirm Password</label>
-                                            <Field
-                                                className="column form-field"
-                                                type="text"
-                                                name="confirmPassword"
-                                                onChange={handleChange}
-                                                value={values.confirmPassword}
-                                                placeholder=" Confirm Password"
-                                            />
-                                        </div>
-                                        
-                                        <div className="container-footer">
-                                            <button className={`${isValid && "active"} save_button button is-rounded`} type="submit" disabled={isSubmitting}>SIGN UP</button>
-                                            
-                                        </div>
-                                    </Form>
+                            </div>
+                        </Form>
 
-                                </div>
-                                )}
-                        </Formik>
                     </div>
+                    )}
+            </Formik>
+        </div>
       )
     }
 }
+
