@@ -29,6 +29,20 @@
     }
 }
 
+.page {
+  align-content: stretch;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  text-align: center;
+  width: 100%;
+  & > div {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+}
+
 .btn-group {
   margin: 0;
 }
