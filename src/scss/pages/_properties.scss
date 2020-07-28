@@ -1,0 +1,22 @@
+.properties {
+    &__container {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        padding: 45px;
+        .section-header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .table-header {
+
+            background-color: $lightGray;
+        }
+        .properties-list{
+          overflow-y: scroll;
+          margin-bottom: 20px;
+        }
+    }
+}
