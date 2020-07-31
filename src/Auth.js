@@ -52,7 +52,12 @@ export const auth = {
         }
       })
       .catch((error) => {
-        alert("Failure signing in");
+        if (error.response?.data?.message){
+          console.log(error.response.data.message)
+          alert(error.response.data.message)
+        } else {
+          alert("Login Failed")
+        }
         return Promise.reject(error);
       });
   },
