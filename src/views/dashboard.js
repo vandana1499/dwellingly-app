@@ -144,7 +144,8 @@ export const Dashboard = (props) => {
                     </div>
                 </div>
             </div>
-            <div className={`modal ${modalActive && 'is-active'}`}>
+            {/* TODO replace this with our modal! Marie and Darren are smart :) */}
+            {/* <div className={`modal ${modalActive && 'is-active'}`}>
                 <div className="modal-background" onClick={() => { handleDenyAccess(false) }}></div>
                 <div className="modal-content">
                     <div className="modal__message_container">
@@ -157,7 +158,7 @@ export const Dashboard = (props) => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </>
     )
 }

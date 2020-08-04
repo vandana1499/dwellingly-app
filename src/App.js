@@ -10,7 +10,7 @@ import { Properties } from "./views/properties";
 import { Tenants } from "./views/tenants";
 import { Terms } from "./views/terms";
 import { Tickets } from "./views/tickets";
-import { ForgotPassword } from "./views/forgotPassword";
+import ForgotPassword from "./views/forgotPassword";
 import EmergencyContacts from "./views/emergencyContacts";
 import AddEmergencyContact from "./views/addEmergencyContact";
 import {
