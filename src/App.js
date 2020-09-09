@@ -1,4 +1,5 @@
 import React from "react";
+import 'react-toastify/dist/ReactToastify.min.css';
 import "./App.scss";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { LoginForm } from "./views/login";
@@ -29,6 +30,8 @@ import Manager from "./views/Manager";
 import { JoinStaff } from "./views/joinStaff";
 import { AddStaffMember } from "./views/addStaffMember";
 import UserContext from "./UserContext";
+import { ToastContainer } from 'react-toastify';
+
 
 var refreshTimeout;
 
@@ -102,7 +105,7 @@ export class App extends React.Component {
           setTimeout( this.refreshJwtPeriodically, 180000 )
         });
         } else {
-          alert("Failed to login");
+          this.notify('Failed to login', 'warn');
         }
       });
   }
@@ -155,10 +158,10 @@ export class App extends React.Component {
 
   render() {
     return (
-      <UserContext.Provider value={{ user: { ...this.state.userSession }, handleSetUser: this.setUser, refreshJWT:this.refreshJwtPeriodically, login: this.login, logout: this.logout }} >
-        <BrowserRouter>
-          <div className='App'>
-            {this.state.userSession.isAuthenticated
+        <UserContext.Provider value={{ user: { ...this.state.userSession }, handleSetUser: this.setUser, refreshJWT:this.refreshJwtPeriodically, login: this.login, logout: this.logout }} >
+          <BrowserRouter>
+            <div className='App'>
+              {this.state.userSession.isAuthenticated
               && <><NavMenu />
                   <Header /></>}
 
@@ -189,11 +192,24 @@ export class App extends React.Component {
                   <PrivateRoute exact path='/request-access/:id' component={RequestAccess} />
                 </div>
               </Switch>
-            {this.state.userSession.isAuthenticated
-              && <Footer />}
-          </div>
-        </BrowserRouter>
-      </UserContext.Provider>
+                {this.state.userSession.isAuthenticated
+                && <Footer />}
+            </div>
+          </BrowserRouter>
+          <ToastContainer
+            position="bottom-right"
+            toastClassName="toast"
+            pauseOnFocusLoss
+            autoClose={4000}
+            hideProgressBar
+            pauseOnHover
+            closeOnClick
+            newestOnTop
+            rtl={false}
+            draggable
+          />
+        </UserContext.Provider>
+      
     );
   }
 }

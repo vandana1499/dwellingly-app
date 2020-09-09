@@ -5,6 +5,7 @@ import * as axios from "axios";
 import { PROPERTY_MANAGER_DATA } from "./dummyData/pManagerData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import Toast from '../utils/toast';
 
 const columns = [
   {
@@ -87,7 +88,7 @@ const Managers = () => {
         console.log(response);
       })
       .catch((error) => {
-        alert(error);
+        Toast(error, "error");
         console.log(error);
       });
   };

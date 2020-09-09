@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import UserContext from '../UserContext';
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import Toast from '../utils/toast';
 
 const columns = [{
     dataField: 'name',
@@ -97,7 +98,7 @@ export class Tenants extends Component {
     //         this.setState({properties: response.data.properties});
     //     })
     //     .catch((error) => {
-    //         alert(error);
+    //         Toast(error, "error");
     //         console.log(error);
     //     })
     // }

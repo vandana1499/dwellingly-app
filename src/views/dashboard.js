@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import UserContext from '../UserContext';
+import Toast from "../utils/toast"
 import useMountEffect from '../utils/useMountEffect';
 import { MODULE_DATA } from '../components/DashboardModule/data';
 import DashboardModule from '../components/DashboardModule';
@@ -36,13 +37,13 @@ export const Dashboard = (props) => {
                     .post("/api/users/role", adminUsersObj, makeAuthHeaders(userContext))
                     .then(({ data }) => setStaffList(data.users));
             })
-            .catch(error => alert(error));
+            .catch(error => Toast(error, "error"));
 
         const pendingUsersObj = { "userrole": 0 };
         axios
             .post("/api/users/role", pendingUsersObj, makeAuthHeaders(userContext))
             .then(({ data }) => setUsersPending(data.users))
-            .catch(error => alert(error));
+            .catch(error => Toast(error, "error"));
     });
   
     const handleAddClick = (id) => {
@@ -73,7 +74,7 @@ export const Dashboard = (props) => {
             }
         }
         catch(err){
-            alert("There was an error processing your request. Please try again later");
+            Toast("There was an error processing your request. Please try again later", "error");
         }
     }
 
@@ -108,7 +109,7 @@ export const Dashboard = (props) => {
                 });
                 setUnstaffedTenants(stillUnstaffed);
             }))
-            .catch(errors => alert(errors));
+            .catch(errors => Toast(errors, "error"));
     }
 
     return (
