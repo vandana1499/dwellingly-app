@@ -10,6 +10,8 @@ This serves as the Frontend Repo of the Full Stack Application for [JOIN Organiz
 
 [Here](https://github.com/codeforpdx/dwellinglybackend) is a link to the Backend's Repo. It has its own README as well!
 
+The wiki is at https://github.com/codeforpdx/dwellinglybackend/wiki
+
 ## Frontend
 
 #### Prerequisite Technologies
